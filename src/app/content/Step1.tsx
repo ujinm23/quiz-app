@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 
 export default function Step1() {
   return (
-    <div className="flex flex-col p-7 items-end w-214 h-110.5 gap-5 border border-[#E4E4E7] rounded-lg">
+    <div className="flex bg-white flex-col p-7 items-end w-214 h-110.5 gap-5 border border-[#E4E4E7] rounded-lg">
       <div className="flex flex-col gap-1.5">
         <div className="flex items-center gap-2">
           <Sparkles />
