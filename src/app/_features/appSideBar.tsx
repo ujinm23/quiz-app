@@ -8,10 +8,10 @@ import {
 
 export function AppSidebar() {
   return (
-    <Sidebar>
-      <SidebarHeader />
-      <SidebarContent>
-        <SidebarGroup />
+    <Sidebar className="bg-white border-white">
+      <SidebarHeader className="bg-white" />
+      <SidebarContent className="bg-white ">
+        <SidebarGroup className="bg-white " />
         <SidebarGroup />
       </SidebarContent>
       <SidebarFooter />

@@ -1,20 +1,20 @@
-generator client{
+datasource db {
+    provider = "postgresql"
+}
+
+generator client {
     provider = "prisma-client-js"
 }
 
-datasource db{
-    provider = "postresql"
-}
-
 model User {
-id Int
-name String 
-classid Int
-class Class @relation(fields: [classId], references: [id])
+    id      Int    @id @default(autoincrement())
+    name    String
+    classId Int
+    class   Class  @relation(fields: [classId], references: [id])
 }
 
 model Class {
-id Int 
-name String 
-users User[]
+    id    Int    @id @default(autoincrement())
+    name  String
+    users User[]
 }
