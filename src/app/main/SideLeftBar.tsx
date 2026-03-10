@@ -35,19 +35,14 @@ export default function SideLeftBar({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    let items: HistoryItem[] = [];
+    loadHistory();
 
-    try {
-      const raw = localStorage.getItem("history");
-      if (raw) {
-        const parsed = JSON.parse(raw) as HistoryItem[];
-        items = Array.isArray(parsed) ? parsed : [];
-      }
-    } catch (err) {
-      console.error("Failed to load history", err);
-    }
+    const onHistoryUpdate = () => loadHistory();
+    window.addEventListener("history-update", onHistoryUpdate);
 
-    setHistoryItems(items);
+    return () => {
+      window.removeEventListener("history-update", onHistoryUpdate);
+    };
   }, []);
 
   return (
@@ -64,7 +59,7 @@ export default function SideLeftBar({ onClose }: { onClose: () => void }) {
           {historyItems.map((item) => (
             <li
               key={item.id}
-              className="cursor-pointer rounded px-2 py-1 hover:bg-zinc-100"
+              className="cursor-pointer rounded px-2 py-4 border-y border-gray-500 hover:bg-zinc-100"
               onClick={() => {
                 localStorage.setItem("selectedHistory", JSON.stringify(item));
                 window.dispatchEvent(new CustomEvent("history-select"));

@@ -1,14 +1,8 @@
 import { type Metadata } from "next";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import AppHeader from "@/components/AppHeader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,31 +34,8 @@ export default function RootLayout({
   return (
     <ClerkProvider publishableKey={clerkKey}>
       <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <header className="flex justify-between items-center p-4 gap-4 h-16 border">
-            <p className="ml-6 text-2xl font-semibold  text-black bg-clip-text bg-[length:200%_200%]">
-              Quiz App
-            </p>
-            <div className="flex items-center gap-4 mr-6">
-              <SignedOut>
-                <SignInButton mode="modal">
-                  <span className="cursor-pointer font-medium text-sm text-black hover:text-[#6c47ff] hover:underline">
-                    Sign In
-                  </span>
-                </SignInButton>
-                <SignUpButton mode="modal">
-                  <button className="bg-black hover:bg-[#5b3ce6] text-white rounded-full font-medium h-8 px-4 transition-colors">
-                    Sign Up
-                  </button>
-                </SignUpButton>
-              </SignedOut>
-              <SignedIn>
-                <UserButton afterSignOutUrl="/" />
-              </SignedIn>
-            </div>
-          </header>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <AppHeader />
           <main>{children}</main>
         </body>
       </html>
