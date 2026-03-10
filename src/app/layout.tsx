@@ -24,12 +24,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // 1. Эхлээд env-ээс уншиж үзнэ, хэрэв байхгүй бол шууд утгыг нь онооно
-  const clerkKey =
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
-    "pk_test_bmljZS1kb2ctNzAuY2xlcmsuYWNjb3VudHMuZGV2JA";
+  const clerkKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
-  console.log("Building with Key:", clerkKey ? "Key exists" : "Key is missing");
+  if (!clerkKey) {
+    throw new Error("Missing NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY");
+  }
 
   return (
     <ClerkProvider publishableKey={clerkKey}>
