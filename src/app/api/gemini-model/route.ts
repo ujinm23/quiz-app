@@ -48,11 +48,20 @@ function generateQuestionsFromText(text: string): Question[] {
     const correctIndex = options.indexOf(target);
 
     return {
-      question: `Q${index + 1}. Fill in the blank: ${blanked}`,
+      question: `Question-${index + 1}. Fill in the blank: ${blanked}`,
       options,
       correctIndex,
     };
   });
+}
+
+function generateSummaryFromText(text: string) {
+  const sentences = text
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0);
+
+  return sentences.slice(0, 3).join(" ");
 }
 
 export async function POST(req: Request) {
@@ -68,10 +77,12 @@ export async function POST(req: Request) {
       );
     }
 
+    const summary = generateSummaryFromText(text);
     const questions = generateQuestionsFromText(text);
 
     return NextResponse.json({
       success: true,
+      summary,
       questions,
     });
   } catch (error) {
