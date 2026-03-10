@@ -1,7 +1,7 @@
 "use client";
 
 import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/nextjs";
-import Header from "./header";
+import AppHeader from "@/components/AppHeader";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./app-sidebar";
 
@@ -13,7 +13,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       </SignedOut>
 
       <SignedIn>
-        <Header />
+        <AppHeader />
 
         <SidebarProvider>
           <div className="flex min-h-[calc(100vh-64px)]">

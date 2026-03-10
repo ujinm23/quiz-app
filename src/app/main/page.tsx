@@ -181,8 +181,7 @@ export default function MainPage() {
                       key={`${option}-${optionIndex}`}
                       className="flex items-start gap-3 rounded-lg border px-3 py-2"
                     >
-                      <span className="mt-0.5 h-4 w-4 shrink-0 rounded-full border border-zinc-400" />
-                      <span className="whitespace-pre-wrap break-words">
+                      <span className="whitespace-pre-wrap break-words font-medium">
                         {option}
                       </span>
                     </div>
